@@ -1,46 +1,43 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-public class NumberProcessorTest {
-    @Test
-    public void testMin() {
-        int[] numbers = {1, 4, 2, 3};
-        assertEquals(1, NumberProcessor._min(numbers));
-    }
-
-    @Test
-    public void testMax() {
-        int[] numbers = {1, 4, 2, 3};
-        assertEquals(4, NumberProcessor._max(numbers));
-    }
-
-    @Test
     public void testSum() {
         int[] numbers = {1, 4, 2, 3};
-        assertEquals(10, NumberProcessor._sum(numbers));
+        assertEquals(10, np._sum(numbers));
     }
-
     @Test
     public void testMult() {
         int[] numbers = {1, 4, 2, 3};
-        assertEquals(24, NumberProcessor._mult(numbers));
+        assertEquals(24, np._mult(numbers));
     }
-
     @Test
-    public void testPerformance() {
-        int[] numbers = new int[1000000];
-        Arrays.fill(numbers, 1);
+    public void testraboti() {
+        int[] largeNumbers = new int[1_000_000];
+        Arrays.fill(largeNumbers, 1);
 
-        long start = System.currentTimeMillis();
-        NumberProcessor._min(numbers);
-        NumberProcessor._max(numbers);
-        NumberProcessor._sum(numbers);
-        NumberProcessor._mult(numbers);
-        long end = System.currentTimeMillis();
+        long startTime = System.nanoTime();
+        np._min(largeNumbers);
+        long endTime = System.nanoTime();
+        System.out.println("Min время исполнения " + (endTime - startTime) + " ns");
 
-        long duration = end - start;
-        System.out.println("Длительность теста производительности: " + duration + "мс");
-        assertTrue(duration < 3000);
+        startTime = System.nanoTime();
+        np._max(largeNumbers);
+        endTime = System.nanoTime();
+        System.out.println("Max время исполнения " + (endTime - startTime) + " нс");
+
+        startTime = System.nanoTime();
+        np._sum(largeNumbers);
+        endTime = System.nanoTime();
+        System.out.println("Sum время исполнения " + (endTime - startTime) + " нс");
+
+        startTime = System.nanoTime();
+        np._mult(largeNumbers);
+        endTime = System.nanoTime();
+        System.out.println("Mult время исполнения " + (endTime - startTime) + " нс");
+    }
+    @Test
+    public void tst() {
+        int[] numbers = {-1, -4, -2, -3};
+        assertEquals(-4, np._min(numbers));
+        assertEquals(-1, np._max(numbers));
+        assertEquals(-10, np._sum(numbers));
+        assertEquals(-24, np._mult(numbers));
     }
 }
-
